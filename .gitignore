@@ -1,0 +1,13 @@
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+UnscentedKF.xcodeproj
+cmake_install.cmake
+Debug/
+UnscentedKF.build/
+
+# silly macOS
+.DS_Store
+
+# build files
+build/
