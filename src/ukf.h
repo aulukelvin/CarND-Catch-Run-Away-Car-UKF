@@ -10,7 +10,7 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-class UKF {
+class UKF { 
 public:
 
   ///* initially set to false, set to true in first call of ProcessMeasurement
@@ -28,6 +28,16 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
+  
+  //create augmented mean vector
+  VectorXd x_aug;
+  
+  //create augmented state covariance
+  MatrixXd P_aug;
+  
+  //create augmented sigma point matrix
+  MatrixXd Xsig_aug;
+  
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
 
@@ -67,6 +77,21 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  int n_z_radar_;
+  
+  int n_z_lidar;
+  
+  MatrixXd S_;
+  
+  MatrixXd R_radar;
+  
+  MatrixXd R_lidar;
+  
+  MatrixXd z_;
+
+  MatrixXd Zsig_;
+
+  VectorXd z_pred_;
 
   /**
    * Constructor
@@ -102,6 +127,17 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+  
+  void AugmentedSigmaPoints();
+  
+  void SigmaPointPrediction(double delta_t);
+
+  void PredictMeanAndCovariance();
+  
+  void PredictRadarMeasurement();
+  
+  void UpdateStateRadar(MeasurementPackage meas_package);
+
 };
 
 #endif /* UKF_H */
